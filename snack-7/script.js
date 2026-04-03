@@ -22,3 +22,27 @@ const chef = {
 
 //Crea una funzione che permette la copia profonda (deep copy) di un oggetto, che copia anche i suoi metodi (proprietà che contengono funzioni). Usa l’oggetto di Code Question 6 come test.
 //Serve usare una funzione ricorsiva! (fai un po’ di ricerca).
+
+function deepCopy(obj) {
+    if (typeof obj !== 'object') {
+        return obj;
+    }
+    if (Array.isArray(obj)) {
+        return obj.map(item => deepCopy(item));
+    }
+
+    const copy = {};
+    for (const key in obj) {
+        const value = obj[key];
+        if (typeof value !== 'object') {
+            copy[key] = value;
+        } else {
+            copy[key] = deepCopy(value);
+        }
+    }
+    return copy;
+}
+
+const chefCopy = deepCopy(chef);
+console.log('chef:', chef)
+console.log('chefCopy:', chefCopy);
