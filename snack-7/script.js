@@ -34,7 +34,7 @@ function deepCopy(obj) {
     const copy = {};
     for (const key in obj) {
         const value = obj[key];
-        if (typeof value !== 'object') {
+        if (value === null || typeof value !== 'object') {
             copy[key] = value;
         } else {
             copy[key] = deepCopy(value);
